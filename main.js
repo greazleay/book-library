@@ -8,6 +8,8 @@ const scripts = document.createElement('script');
 scripts.src = './scripts.js';
 body.appendChild(scripts);
 
+// Form and it's children
+
 const form = document.createElement('form');
 form.classList.add('form');
 
@@ -16,56 +18,59 @@ const label = (htmlFor, text) => {
     label.classList.add('form-label');
     label.htmlFor = htmlFor;
     label.textContent = text;
-    div.appendChild(label)
+    formItem.appendChild(label)
 }
 
-const input = (type, name) => {
+const input = (type, name, required) => {
     let input = document.createElement('input');
     input.classList.add('form-input');
     input.type = type;
     input.name = name;
-    input.required = true;
-    div.appendChild(input)
+    input.required = required;
+    formItem.appendChild(input)
 }
 
-let div = document.createElement('div');
-div.classList.add('form-item');
-form.appendChild(div)
-
+let formItem = document.createElement('div');
+formItem.classList.add('form-item');
 label('title', 'Title:');
-input('text','title');
+input('text','title', true);
+form.appendChild(formItem);
 
-div = document.createElement('div');
-div.classList.add('form-item');
-form.appendChild(div);
-
+formItem = document.createElement('div');
+formItem.classList.add('form-item');
 label('author', 'Author:');
-input('text', 'author');
+input('text', 'author', true);
+form.appendChild(formItem);
 
-div = document.createElement('div');
-div.classList.add('form-item');
-form.appendChild(div);
-
+formItem = document.createElement('div');
+formItem.classList.add('form-item');
 label('pages', 'Pages:');
-input('text', 'pages');
+input('number', 'pages', true);
+form.appendChild(formItem);
 
-div = document.createElement('div');
-div.classList.add('form-item');
-form.appendChild(div);
+formItem = document.createElement('div');
+formItem.classList.add('form-item');
+label('read', 'Read?');
+input('checkbox', 'read', false);
+form.appendChild(formItem);
 
 const submit = document.createElement('input');
 submit.classList.add('submit');
 submit.type = 'submit';
-submit.value = 'Submit';
-div.appendChild(submit);
+submit.value = 'Add New Book';
+form.appendChild(submit);
 
-div = document.createElement('div');
-div.classList.add('books');
-container.appendChild(div);
+// Button to add a new book
 
-const button = document.createElement('button');
-button.classList.add('btn');
-button.textContent = 'New Book';
-container.appendChild(button);
+const addBook = document.createElement('button');
+addBook.classList.add('btn');
+addBook.textContent = 'New Book';
+container.appendChild(addBook);
 
-container.appendChild(form)
+// Books container
+
+const books = document.createElement('div');
+books.classList.add('books');
+container.appendChild(books);
+
+container.appendChild(form);

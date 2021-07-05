@@ -1,32 +1,74 @@
 html {
-    box-sizing: border-box;
-    font-size: 17px;
+  box-sizing: border-box;
+  font-size: 17px;
 }
 
-*, *::before, *::after {
-    box-sizing: inherit;
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: darkslategrey;
 }
 
 .container {
-    display: flex;
-    flex-flow: column wrap;
+  display: flex;
+  flex-flow: column wrap;
 }
 
 .form {
-    visibility: hidden;
+  visibility: hidden;
+  position: relative;
 }
 
 .books {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
 }
 
 .book {
-    outline: hotpink solid;
-    padding: 2rem;
+  outline: hotpink solid;
+  padding: 2rem;
 }
 
 .btn {
-    margin-top: 1rem;
+  margin-top: 1rem;
+}
+
+input[type='checkbox'] {
+    -webkit-appearance: none;
+    outline: none;
+    position: relative;
+    width: 2.2rem;
+    height: 1rem;
+    background-color: yellow;
+    border-radius: 1rem;
+    transition: all .50s;
+}
+
+input[type='checkbox']:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0.9rem;
+    width: 1rem;
+    background-color: navy;
+    border-radius: 50px;
+    margin: 1px;
+    transition: all .5s;
+  }
+
+  input[type='checkbox']:checked {
+    background-color: red;
+    transition: all .50s;
+  
+}
+  
+input[type='checkbox']:checked:before {
+    transform: translate(100%);
+    transition: all .5s;
 }
