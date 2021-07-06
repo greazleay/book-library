@@ -43,10 +43,13 @@ function booksLibrary() {
         para(item['author']);
         para(item['pages']);
 
+        const toggle = document.createElement('div');
+        toggle.classList.add('toggle-button')
+
         const checklabel = document.createElement('label');
         checklabel.htmlFor = 'checked';
         checklabel.textContent = 'Read?';
-        book.appendChild(checklabel)
+        toggle.appendChild(checklabel)
 
         const bookstatus = document.createElement('input');
         bookstatus.type = 'checkbox';
@@ -57,7 +60,8 @@ function booksLibrary() {
             item.handleChange(e.target.checked);
             setLibrary();
         };
-        book.appendChild(bookstatus);
+        toggle.appendChild(bookstatus);
+        book.appendChild(toggle);
 
         const remove = document.createElement('button');
         remove.classList.add('remove');
@@ -77,7 +81,7 @@ function booksLibrary() {
 booksLibrary()
 
 newBook.addEventListener('click', (e) => {
-    form.style.visibility = 'visible'
+    popup.style.display = 'block'
     form.querySelector('input[name="title"]').value = null;
     form.querySelector('input[name="author"]').value = null;
     form.querySelector('input[name="pages"]').value = null;
@@ -114,3 +118,9 @@ form.addEventListener('submit', (e) => {
     e.target.style.visibility = 'hidden';
     addNewBookToLibrary();
 })
+
+window.onclick = function(event) {
+    if (event.target.className === 'form-popup') {
+        popup.style.display = "none";
+    }
+  }

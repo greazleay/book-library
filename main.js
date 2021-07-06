@@ -8,7 +8,23 @@ const scripts = document.createElement('script');
 scripts.src = './scripts.js';
 body.appendChild(scripts);
 
-// Form and it's children
+// Button to add a new book
+
+const newBook = document.createElement('button');
+newBook.classList.add('btn');
+newBook.textContent = 'New Book';
+container.appendChild(newBook);
+
+// Books container
+
+const books = document.createElement('div');
+books.classList.add('books');
+container.appendChild(books);
+
+// Form wrapper and form with children
+
+const popup = document.createElement('div');
+popup.classList.add('form-popup');
 
 const form = document.createElement('form');
 form.classList.add('form');
@@ -59,18 +75,6 @@ submit.classList.add('submit');
 submit.type = 'submit';
 submit.value = 'Add New Book';
 form.appendChild(submit);
+popup.appendChild(form)
 
-// Button to add a new book
-
-const newBook = document.createElement('button');
-newBook.classList.add('btn');
-newBook.textContent = 'New Book';
-container.appendChild(newBook);
-
-// Books container
-
-const books = document.createElement('div');
-books.classList.add('books');
-container.appendChild(books);
-
-container.appendChild(form);
+container.appendChild(popup);
