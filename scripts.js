@@ -1,4 +1,15 @@
-let myLibrary = [];
+function getLibrary() {
+    if (localStorage.length === 0) return [];
+    return JSON.parse(localStorage.getItem('myLibrary')).map(book => {
+        return new Book(book.title, book.author, book.pages, book.read)
+    });
+}
+
+let myLibrary = getLibrary();
+
+function setLibrary() {
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
+}
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -7,18 +18,16 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
-// Book.prototype = {
-//     get handleChange () { return this.read },
-//     set handleChange(value) {
-//         this.read = value
-//     }
-// }
+Book.prototype.handleChange = function(value) { this.read = value; }
 
-Book.prototype.handleChange = function(value) {
-    this.read = value;
+function clearLibrary() {
+    const books = document.querySelector('.books');
+    books.childNodes.forEach(child => books.removeChild(child))
 }
 
-function addBookToLibrary() {
+function booksLibrary() {
+    clearLibrary();
+
     myLibrary.forEach((item, index) => {
         const books = document.querySelector('.books');
         let book = document.createElement('div');
@@ -46,6 +55,7 @@ function addBookToLibrary() {
         bookstatus.onchange = function (e) {
             e.stopPropagation();
             item.handleChange(e.target.checked);
+            setLibrary();
         };
         book.appendChild(bookstatus);
 
@@ -56,6 +66,7 @@ function addBookToLibrary() {
             myLibrary.splice(index, 1); 
             const parent = remove.parentNode;
             books.removeChild(parent);
+            setLibrary();
         }
         
         book.appendChild(remove);
@@ -63,17 +74,43 @@ function addBookToLibrary() {
     })
 }
 
-addBook.addEventListener('click', () => {
+booksLibrary()
+
+newBook.addEventListener('click', (e) => {
     form.style.visibility = 'visible'
+    form.querySelector('input[name="title"]').value = null;
+    form.querySelector('input[name="author"]').value = null;
+    form.querySelector('input[name="pages"]').value = null;
+    form.querySelector('input[type="checkbox"]').checked = false;
 })
+
+
+function addNewBookToLibrary() {
+    const title = form.querySelector('input[name="title"]').value;
+    const author = form.querySelector('input[name="author"]').value;
+    const pages = form.querySelector('input[name="pages"]').value;
+    let read = form.querySelector('input[type="checkbox"]').checked;
+
+    read.onchange = function() {
+        switch (read) {
+            case false:
+                read = true;
+                break;
+            default:
+                read = false;
+                break;
+            }
+        };
+
+    const currentBook = new Book(title, author, pages, read) 
+    myLibrary.push(currentBook);
+
+    setLibrary();
+    booksLibrary();
+}
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const title = document.querySelector('input[name="title"]').value;
-    const author = document.querySelector('input[name="author"]').value;
-    const pages = document.querySelector('input[name="pages"]').value;
-    const read = document.querySelector('input[type="checkbox"]').checked;
-    myLibrary.push(new Book(title, author, pages, read));
     e.target.style.visibility = 'hidden';
-    addBookToLibrary()
+    addNewBookToLibrary();
 })

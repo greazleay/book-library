@@ -62,10 +62,10 @@ form.appendChild(submit);
 
 // Button to add a new book
 
-const addBook = document.createElement('button');
-addBook.classList.add('btn');
-addBook.textContent = 'New Book';
-container.appendChild(addBook);
+const newBook = document.createElement('button');
+newBook.classList.add('btn');
+newBook.textContent = 'New Book';
+container.appendChild(newBook);
 
 // Books container
 
