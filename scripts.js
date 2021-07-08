@@ -33,15 +33,15 @@ function booksLibrary() {
         let book = document.createElement('div');
         book.classList.add('book')
         
-        const para = (text) => {
+        const para = (forward, text) => {
             let p = document.createElement('p');
-            p.textContent = text;
+            p.textContent = `${forward}: ${text}`;
             book.appendChild(p);
         }
         
-        para(item['title']);
-        para(item['author']);
-        para(item['pages']);
+        para("Book Title", item['title']);
+        para("Author", item['author']);
+        para("No. of pages", item['pages']);
 
         const toggle = document.createElement('div');
         toggle.classList.add('toggle-button')
