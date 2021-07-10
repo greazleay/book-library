@@ -15,20 +15,36 @@ html {
 }
 
 html, body {
-  margin-top: 0;
+  margin: 0;
   background-color: #092544;
 }
 
-p, .book label {
-  color: white;
+.container {
+  display: flex;
+  flex-flow: column wrap;
+  width: 100%;
 }
 
-button {
+header {
+  display: flex;
+  flex-flow: row wrap;
+  background-color: cyan;
+  align-content: center;
+  height: 4rem;
+}
+
+header button {
   font-family: inherit;
   outline: none;
   border: none;
-  border-radius: 5px;
-  background-color: #c4a6a1;
+  border-radius: 10px;
+  background: #ebe96e;
+  color: #1f2137;
+  margin: 0 1rem;
+  height: 3rem;
+  max-width: max-content;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 button:hover {
@@ -37,9 +53,8 @@ button:hover {
   font-weight: bolder;
 }
 
-.container {
-  display: flex;
-  flex-flow: column wrap;
+p, .book label {
+  color: white;
 }
 
 .form-popup {
@@ -67,7 +82,7 @@ button:hover {
 .form {
   position: relative;
   background-color: #876b36;
-  margin: 2rem auto;
+  margin: 4.5rem auto;
   padding: 4px 8px;
   border: 1px solid #888;
   border-radius: 5px;

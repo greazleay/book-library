@@ -10,10 +10,18 @@ body.appendChild(scripts);
 
 // Button to add a new book
 
+const header = document.createElement('header');
+container.appendChild(header);
+
 const newBook = document.createElement('button');
 newBook.classList.add('btn');
-newBook.textContent = 'New Book';
-container.appendChild(newBook);
+newBook.textContent = '+ New Book';
+header.appendChild(newBook);
+
+const h1 = document.createElement('h1');
+// newBook.classList.add('btn');
+h1.textContent = 'Virtual Book Library';
+header.appendChild(h1);
 
 // Books container
 
