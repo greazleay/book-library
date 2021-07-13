@@ -11,14 +11,18 @@ function setLibrary() {
     localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
 }
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-}
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
 
-Book.prototype.handleChange = function(value) { this.read = value; }
+    handleChange(value) {
+        this.read = value
+    }
+}
 
 function clearLibrary() {
     const books = document.querySelector('.books');
