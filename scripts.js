@@ -1,16 +1,3 @@
-function getLibrary() {
-    if (localStorage.length === 0) return [];
-    return JSON.parse(localStorage.getItem('myLibrary')).map(book => {
-        return new Book(book.title, book.author, book.pages, book.read)
-    });
-}
-
-let myLibrary = getLibrary();
-
-function setLibrary() {
-    localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
-}
-
 class Book {
     constructor(title, author, pages, read) {
         this.title = title;
@@ -22,6 +9,19 @@ class Book {
     handleChange(value) {
         this.read = value
     }
+}
+
+function getLibrary() {
+    if (localStorage.length === 0) return [];
+    return JSON.parse(localStorage.getItem('myLibrary')).map(book => {
+        return new Book(book.title, book.author, book.pages, book.read)
+    });
+}
+
+let myLibrary = getLibrary();
+
+function setLibrary() {
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
 }
 
 function clearLibrary() {
