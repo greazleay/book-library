@@ -1,5 +1,5 @@
 function getLibrary() {
-    if (localStorage.length === 0) return [];
+    if (!localStorage.getItem('myLibrary')) return [];
     return JSON.parse(localStorage.getItem('myLibrary')).map(book => {
         return new Book(book.title, book.author, book.pages, book.read)
     });
