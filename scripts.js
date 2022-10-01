@@ -1,3 +1,49 @@
+window.addEventListener('load', () => {
+
+    const myLibrary = [
+        {
+            title: 'The Thursday Murder Club',
+            author: 'Richard Osman',
+            pages: 400,
+            read: false
+        },
+        {
+            title: 'Catch-22',
+            author: 'Joseph Heller',
+            pages: 424,
+            read: false
+        },
+        {
+            title: 'It Ends with Us',
+            author: 'Colleen Hoover',
+            pages: 384,
+            read: false
+        }
+    ];
+
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
+});
+
+window.onclick = function (event) {
+    if (event.target.className === 'form-popup') {
+        popup.style.display = "none";
+    }
+}
+
+class Book {
+    
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+    
+    handleChange(value) {
+        this.read = value;
+    }
+};
+
 function getLibrary() {
     if (!localStorage.getItem('myLibrary')) return [];
     return JSON.parse(localStorage.getItem('myLibrary')).map(book => {
@@ -11,15 +57,6 @@ function setLibrary() {
     localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
 }
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-}
-
-Book.prototype.handleChange = function(value) { this.read = value; }
-
 function clearLibrary() {
     const books = document.querySelector('.books');
     books.childNodes.forEach(child => books.removeChild(child))
@@ -32,13 +69,13 @@ function booksLibrary() {
         const books = document.querySelector('.books');
         let book = document.createElement('div');
         book.classList.add('book')
-        
+
         const para = (forward, text) => {
             let p = document.createElement('p');
             p.textContent = `${forward}: ${text}`;
             book.appendChild(p);
         }
-        
+
         para("Book Title", item['title']);
         para("Author", item['author']);
         para("No. of pages", item['pages']);
@@ -66,13 +103,13 @@ function booksLibrary() {
         const remove = document.createElement('button');
         remove.classList.add('remove');
         remove.textContent = 'Remove';
-        remove.onclick = () => { 
-            myLibrary.splice(index, 1); 
+        remove.onclick = () => {
+            myLibrary.splice(index, 1);
             const parent = remove.parentNode;
             books.removeChild(parent);
             setLibrary();
         }
-        
+
         book.appendChild(remove);
         books.appendChild(book);
     })
@@ -95,7 +132,7 @@ function addNewBookToLibrary() {
     const pages = form.querySelector('input[name="pages"]').value;
     let read = form.querySelector('input[type="checkbox"]').checked;
 
-    read.onchange = function() {
+    read.onchange = function () {
         switch (read) {
             case false:
                 read = true;
@@ -103,10 +140,10 @@ function addNewBookToLibrary() {
             default:
                 read = false;
                 break;
-            }
-        };
+        }
+    };
 
-    const currentBook = new Book(title, author, pages, read) 
+    const currentBook = new Book(title, author, pages, read)
     myLibrary.push(currentBook);
 
     setLibrary();
@@ -118,9 +155,3 @@ form.addEventListener('submit', (e) => {
     e.target.style.visibility = 'hidden';
     addNewBookToLibrary();
 })
-
-window.onclick = function(event) {
-    if (event.target.className === 'form-popup') {
-        popup.style.display = "none";
-    }
-  }
